@@ -24,17 +24,20 @@ pipeline {
             }
         }
         //
-        //stage('Setup Flutter') {
-        //    steps {
-        //        script {
-        //            if (!fileExists('flutter/bin/flutter')) {
-        //                sh 'git clone https://github.com/flutter/flutter.git -b stable --depth 1'
-        //            }
-        //            sh 'flutter doctor'
-        //            sh 'flutter pub get'
-        //        }
-        //    }
-        //}
+        stage('Setup Flutter') {
+            steps {
+                script {
+                    if (!fileExists('flutter/bin/flutter')) {
+                        echo 'The File Does not exist'
+                        sh 'git clone https://github.com/flutter/flutter.git -b stable --depth 1'
+                    }else{
+                        echo 'The File exist'
+                    }
+                    sh 'flutter doctor'
+                    sh 'flutter pub get'
+                }
+            }
+        }
         //
         //stage('Run Tests') {
         //    steps {
