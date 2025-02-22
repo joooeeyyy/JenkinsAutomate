@@ -14,11 +14,15 @@ pipeline {
            }
         }
 
-        //stage('Checkout Code') {
-        //    steps {
-        //        git branch: 'master', url: 'https://github.com/joooeeyyy/JenkinsAutomate.git'
-        //    }
-        //}
+        stage('Checkout Code') {
+            steps {
+                // Ensure a clean workspace
+                deleteDir()
+
+                // Checkout the repository
+                git branch: 'master', url: 'https://github.com/joooeeyyy/JenkinsAutomate.git'
+            }
+        }
         //
         //stage('Setup Flutter') {
         //    steps {
