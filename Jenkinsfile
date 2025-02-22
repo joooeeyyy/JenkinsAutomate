@@ -7,29 +7,36 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
-            steps {
-                git branch: 'master', url: 'https://github.com/joooeeyyy/JenkinsAutomate.git'
-            }
+
+        stage('Clone'){
+           steps(){
+               git 'https://github.com/joooeeyyy/JenkinsAutomate.git'
+           }
         }
 
-        stage('Setup Flutter') {
-            steps {
-                script {
-                    if (!fileExists('flutter/bin/flutter')) {
-                        sh 'git clone https://github.com/flutter/flutter.git -b stable --depth 1'
-                    }
-                    sh 'flutter doctor'
-                    sh 'flutter pub get'
-                }
-            }
-        }
-
-        stage('Run Tests') {
-            steps {
-                sh 'flutter test'
-            }
-        }
+        //stage('Checkout Code') {
+        //    steps {
+        //        git branch: 'master', url: 'https://github.com/joooeeyyy/JenkinsAutomate.git'
+        //    }
+        //}
+        //
+        //stage('Setup Flutter') {
+        //    steps {
+        //        script {
+        //            if (!fileExists('flutter/bin/flutter')) {
+        //                sh 'git clone https://github.com/flutter/flutter.git -b stable --depth 1'
+        //            }
+        //            sh 'flutter doctor'
+        //            sh 'flutter pub get'
+        //        }
+        //    }
+        //}
+        //
+        //stage('Run Tests') {
+        //    steps {
+        //        sh 'flutter test'
+        //    }
+        //}
 
         //stage('Build APK') {
         //    steps {
