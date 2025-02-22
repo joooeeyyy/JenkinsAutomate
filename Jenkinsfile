@@ -86,12 +86,15 @@ pipeline {
         stage('Build APK') {
             steps {
                 script {
-                    sh '''
-            cd ${WORKSPACE}
-            flutter doctor
-            flutter build apk --split-per-abi
-            '''
-        }
+                    dir('CI-CD-Flutter') { // Make sure to point to the correct Flutter project directory
+                        echo "Running Flutter build in directory: ${PWD()}"
+                        sh '''
+                        flutter clean
+                        flutter pub get
+                        flutter build apk --release --split-per-abi
+                        '''
+                     }
+                    }
                //sh 'flutter build apk --split-per-abi'
             }
         }
