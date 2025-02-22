@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 class RemoteServices{
 
-
   static var BASE_URL = "https://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
 
   static Future<List<Product>?> fetchProductsService({required http.Client client}) async {

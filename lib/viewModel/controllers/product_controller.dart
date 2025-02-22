@@ -18,7 +18,7 @@ class ProductController extends GetxController{
   void fetchProductsController() async {
          print("fetchProductsController triggered");
          var productResponse =  await RemoteServices.fetchProductsService(client:client);
-         print("size of product ${productResponse!.length}");
+        // print("size of product ${productResponse!.length}");
           productList.value = productResponse!;
     }
 

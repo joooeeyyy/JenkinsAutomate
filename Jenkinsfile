@@ -31,26 +31,26 @@ pipeline {
             }
         }
 
-        stage('Build APK') {
-            steps {
-                sh 'flutter build apk --release'
-            }
-        }
+        //stage('Build APK') {
+        //    steps {
+        //        sh 'flutter build apk --release'
+        //    }
+        //}
 
-        stage('Build iOS') {
-            when {
-                expression { return isUnix() } // iOS builds only run on MacOS agents
-            }
-            steps {
-                sh 'flutter build ios --no-codesign'
-            }
-        }
+        //stage('Build iOS') {
+        //    when {
+        //        expression { return isUnix() } // iOS builds only run on MacOS agents
+        //    }
+        //    steps {
+        //        sh 'flutter build ios --no-codesign'
+        //    }
+        //}
 
-        stage('Archive Artifacts') {
-            steps {
-                archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/app-release.apk', fingerprint: true
-            }
-        }
+        //stage('Archive Artifacts') {
+        //    steps {
+        //        archiveArtifacts artifacts: 'build/app/outputs/flutter-apk/app-release.apk', fingerprint: true
+        //    }
+        //}
     }
 
     post {
