@@ -42,41 +42,41 @@ pipeline {
                 }
             }
         }
-        //stage('Setup Flutter') {
-        //    steps {
-        //        script {
-        //            if (!fileExists('flutter/bin/flutter')) {
-        //                echo 'Does not exist first check'
-        //                sh 'git clone https://github.com/flutter/flutter.git -b stable'
-        //            }else{
-        //                  echo ' exist first check'
-        //                  sh 'rm -rf flutter'
-        //            }
-        //            sh 'git status'
-        //            sh 'git remote -v'
-        //            sh 'git fetch --all'
-        //
-        //            def flutterDir = '$WORKSPACE/flutter/bin/flutter/'
-        //
-        //            // Check if the directory exists, then remove it
-        //            sh """
-        //                if [ -d "$flutterDir" ]; then
-        //                    echo "Deleting Flutter directory at $flutterDir"
-        //                    rm -rf "$flutterDir"
-        //                else
-        //                    echo "Flutter directory does not exist."
-        //                fi
-        //            """
-        //
-        //            sh 'git clone https://github.com/flutter/flutter.git -b stable'
-        //
-        //            sh 'flutter channel stable'
-        //            sh 'flutter upgrade'
-        //            sh 'flutter doctor'
-        //            sh 'flutter pub get'
-        //        }
-        //    }
-        //}
+        stage('Setup Flutter') {
+            steps {
+                script {
+                    if (!fileExists('flutter/bin/flutter')) {
+                        echo 'Does not exist first check'
+                        sh 'git clone https://github.com/flutter/flutter.git -b stable'
+                    }else{
+                          echo ' exist first check'
+                          sh 'rm -rf flutter'
+                    }
+                    sh 'git status'
+                    sh 'git remote -v'
+                    sh 'git fetch --all'
+
+                    def flutterDir = '$WORKSPACE/flutter/bin/flutter/'
+
+                    // Check if the directory exists, then remove it
+                    sh """
+                        if [ -d "$flutterDir" ]; then
+                            echo "Deleting Flutter directory at $flutterDir"
+                            rm -rf "$flutterDir"
+                        else
+                            echo "Flutter directory does not exist."
+                        fi
+                    """
+
+                    sh 'git clone https://github.com/flutter/flutter.git -b stable'
+
+                    sh 'flutter channel stable'
+                    sh 'flutter upgrade'
+                    sh 'flutter doctor'
+                    sh 'flutter pub get'
+                }
+            }
+        }
         stage('Run Tests') {
             steps {
                 sh 'flutter test'
