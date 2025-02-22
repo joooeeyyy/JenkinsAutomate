@@ -15,7 +15,9 @@ pipeline {
          stage('Setup Android SDK') {
             steps {
                 script {
-                    sh '''
+                    def sdkPathExists = sh(script: 'if [ -d "$ANDROID_HOME" ]; then echo "exists"; else echo "missing"; fi', returnStdout: true).trim()
+                     if (sdkPathExists == "missing") {
+                        sh '''
                     # Create SDK directory if it doesn't exist
                     mkdir -p $ANDROID_HOME/cmdline-tools
                     cd $ANDROID_HOME/cmdline-tools
@@ -34,6 +36,9 @@ pipeline {
                     # Install necessary SDK components
                     sdkmanager --install "platform-tools" "build-tools;34.0.0" "platforms;android-34"
                     '''
+                    }else {
+                        echo "Android SDK is already installed. Skipping installation."
+                    }
                 }
             }
         }
@@ -80,7 +85,14 @@ pipeline {
 
         stage('Build APK') {
             steps {
-                sh 'flutter build apk --release'
+                script {
+                    sh '''
+            cd ${WORKSPACE}
+            flutter doctor
+            flutter build apk --split-per-abi
+            '''
+        }
+               //sh 'flutter build apk --split-per-abi'
             }
         }
 
