@@ -5,14 +5,12 @@ pipeline {
         FLUTTER_HOME = "$WORKSPACE/flutter"
         PATH = "$FLUTTER_HOME/bin:$PATH"
     }
-
     stages {
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/joooeeyyy/JenkinsAutomate.git'
             }
         }
-
         stage('Setup Flutter') {
             steps {
                 script {
@@ -24,7 +22,6 @@ pipeline {
                 }
             }
         }
-
         stage('Run Tests') {
             steps {
                 sh 'flutter test'
