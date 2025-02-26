@@ -91,7 +91,7 @@ pipeline {
                         sh '''
                         flutter clean
                         flutter pub get
-                        flutter build apk --debug --split-per-abi --target=lib/main.dart
+                        flutter build apk --debug --split-per-abi
                         '''
                      }
                     }
